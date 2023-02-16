@@ -33,3 +33,18 @@ html {
   caption {
     padding: 10px;
   }
+  .className{
+    padding: 1%;
+  }
+  select{
+    font-size: 90%;
+  }
+    
+  
+  .cycleDayBox{
+    padding: 1%;
+    margin-top: 1%;
+    font-size: 150%;
+
+    width: fit-content;
+  }
