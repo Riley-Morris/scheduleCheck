@@ -2,7 +2,7 @@ function generateDates(startDate, endDate){
   let dateRange = {}
   let unixStart = startDate.getTime();
   console.log(unixStart + ' - unix start here')
-  console.log(timeConverter(unixStart) + ' readable format here for start')
+  console.log(timeConverter(unixStart) + ' readable format here for time start')
   let unixEnd = endDate.getTime();
   for (let u = unixStart; u<=unixEnd; u +=86400000) {
     // create key:value pairs with dates being the key, set 0 for all values
@@ -18,9 +18,6 @@ function parseDate(dateToParse) {
   return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
 }
 
-let start = parseDate('2023-02-20')
-let end = parseDate('2023-06-23')
-let range = generateDates(start, end)
 let testDate = adjustDaylightSavings(parseDate('2023-03-13').getTime())
 
 
@@ -48,6 +45,9 @@ function adjustDaylightSavings(unixTimeStamp){
   }
 }
 
-console.log(range)
+let start = parseDate('2023-02-20')
+let end = parseDate('2023-06-23')
+let range = generateDates(start, end)
+
 
 // Generalize adjustDayLightSavings function to all years to 2038
