@@ -1,7 +1,7 @@
 function generateDates(startDate, endDate){
   let dateRange = {}
   let unixStart = startDate.getTime();
-  console.log(unixStart + 'start here')
+  console.log(unixStart + ' - unix start here')
   let unixEnd = endDate.getTime();
   for (let u = unixStart; u<=unixEnd; u +=86400000) {
     // create key:value pairs with dates being the key, set 0 for all values
@@ -20,13 +20,13 @@ function parseDate(dateToParse) {
 let start = parseDate('2023-02-20')
 let end = parseDate('2023-06-23')
 let range = generateDates(start, end)
-let testDate = parseDate('2023-03-13').getTime()
+let testDate = adjustDaylightSavings(parseDate('2023-03-13').getTime())
 let Datekeys = Object.keys(range)
 console.log(testDate)
 // console.log(Datekeys)
 // console.log(range[start])
 console.log(range[testDate])
-// console.log(range['Thu Apr 06 2023 01:00:00 GMT-0400 (Eastern Daylight Time)'])
+
 
 function timeConverter(UNIX_timestamp){
   var a = new Date(UNIX_timestamp * 1000);
@@ -39,6 +39,16 @@ function timeConverter(UNIX_timestamp){
   var sec = a.getSeconds();
   var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
   return time;
+}
+
+function adjustDaylightSavings(unixTimeStamp){
+  //configured for 2023 only
+  if (unixTimeStamp > 1678597200000 && unixTimeStamp < 1699156800000){
+    let newStamp = unixTimeStamp + 3600000
+    return newStamp
+  }else {
+    return unixTimeStamp
+  }
 }
 
 console.log(range)
