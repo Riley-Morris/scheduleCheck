@@ -2,6 +2,7 @@ function generateDates(startDate, endDate){
   let dateRange = {}
   let unixStart = startDate.getTime();
   console.log(unixStart + ' - unix start here')
+  console.log(timeConverter(unixStart) + ' readable format here for start')
   let unixEnd = endDate.getTime();
   for (let u = unixStart; u<=unixEnd; u +=86400000) {
     // create key:value pairs with dates being the key, set 0 for all values
@@ -21,15 +22,10 @@ let start = parseDate('2023-02-20')
 let end = parseDate('2023-06-23')
 let range = generateDates(start, end)
 let testDate = adjustDaylightSavings(parseDate('2023-03-13').getTime())
-let Datekeys = Object.keys(range)
-console.log(testDate)
-// console.log(Datekeys)
-// console.log(range[start])
-console.log(range[testDate])
 
 
 function timeConverter(UNIX_timestamp){
-  var a = new Date(UNIX_timestamp * 1000);
+  var a = new Date(UNIX_timestamp / 1000);
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var year = a.getFullYear();
   var month = months[a.getMonth()];
@@ -53,4 +49,5 @@ function adjustDaylightSavings(unixTimeStamp){
 
 console.log(range)
 
-// FIX TIME ZONE ERROR, OFF BY 1 Hour btw test date and generated object
+// New bug with timeConverter function - your entries are in milliseconds, that converts from seconds, 
+//figure out a way to standardize things
