@@ -24,16 +24,17 @@ let range = generateDates(start, end)
 let testDate = adjustDaylightSavings(parseDate('2023-03-13').getTime())
 
 
-function timeConverter(UNIX_timestamp){
-  var a = new Date(UNIX_timestamp / 1000);
-  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var date = a.getDate();
-  var hour = a.getHours();
-  var min = a.getMinutes();
-  var sec = a.getSeconds();
-  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+function timeConverter(unixTimeStamp){
+  let a = new Date(unixTimeStamp)
+  let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let year = a.getFullYear();
+  console.log(year)
+  let month = months[a.getMonth()];
+  let date = a.getDate();
+  let hour = a.getHours();
+  let min = a.getMinutes();
+  let sec = a.getSeconds();
+  let time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
   return time;
 }
 
@@ -49,5 +50,4 @@ function adjustDaylightSavings(unixTimeStamp){
 
 console.log(range)
 
-// New bug with timeConverter function - your entries are in milliseconds, that converts from seconds, 
-//figure out a way to standardize things
+// Generalize adjustDayLightSavings function to all years to 2038
