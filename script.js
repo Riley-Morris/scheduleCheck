@@ -1,3 +1,5 @@
+//Functions operate with milliseconds unix time stamp
+
 function generateDates(startDate, endDate){
   let dateRange = {}
   let unixStart = startDate.getTime();
@@ -22,17 +24,8 @@ let testDate = adjustDaylightSavings(parseDate('2023-03-13').getTime())
 
 
 function timeConverter(unixTimeStamp){
-  let a = new Date(unixTimeStamp)
-  let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  let year = a.getFullYear();
-  console.log(year)
-  let month = months[a.getMonth()];
-  let date = a.getDate();
-  let hour = a.getHours();
-  let min = a.getMinutes();
-  let sec = a.getSeconds();
-  let time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-  return time;
+  const a = new Date(unixTimeStamp)
+  return a
 }
 
 function adjustDaylightSavings(unixTimeStamp){
@@ -45,9 +38,25 @@ function adjustDaylightSavings(unixTimeStamp){
   }
 }
 
-let start = parseDate('2023-02-20')
+let start = parseDate('2023-03-06')
 let end = parseDate('2023-06-23')
 let range = generateDates(start, end)
 
+//first saturday in above period
+let saturdayStart = 1678078800000
+let saturdayEnd = 	1686974400000
+
+function getWeekendsRange(startSaturday, endSaturday){
+  //return an array of weekend unix timestamps within range
+  
+  const weekendArr = []
+
+}
+
+console.log(range)
+console.log(range[saturdayStart])
 
 // Generalize adjustDayLightSavings function to all years to 2038
+//see https://stackoverflow.com/questions/5741632/javascript-date-7-days 
+//and https://stackoverflow.com/questions/12783685/how-to-find-out-how-many-if-any-weekends-occur-in-a-given-period
+//to finish getWeekendRange function
