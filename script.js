@@ -46,19 +46,31 @@ let range = generateDates(start, end)
 let saturdayStart = 1678078800000
 let saturdayEnd = 	1686974400000
 
-function getWeekendsRange(startSaturday, endSaturday){
   //return an array of weekend unix timestamps within range
-  let weekendDate = new Date(startSaturday)
-  weekendDate.setDate(weekendDate.getDate() + 7);
-  console.log(weekendDate)
+function getWeekendsRange(startSaturday, endSaturday){
   const weekendArr = []
-
+  let startSunday = new Date(startSaturday)
+  let endSunday = new Date(endSaturday)
+  startSunday.setDate(startSunday.getDate() + 1)
+  //seven days of unix timestamp
+  const sevenDays = 86400000 * 7;
+  //time interval between start and end dates in unix timestamp
+  const timeInterval = endSaturday - startSaturday
+  //amount of saturdays in time interval
+  const numberOfSaturdays = timeInterval/sevenDays
+  console.log(Math.round(numberOfSaturdays))
+  for (let i = 1; i <= numberOfSaturdays; i++){
+    let satDate = new Date(startSaturday);
+    satDate.setDate(satDate.getDate() + (i*7));
+    weekendArr.push(satDate)
+    let sunDate = new Date(startSunday);
+    sunDate.setDate(sunDate.getDate() + (i*7));
+    weekendArr.push(sunDate)
+  }
+  return weekendArr
 }
-getWeekendsRange(1678510800000, 1686974400000)
-console.log(range)
+let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
+console.log(weekendsInInterval)
 console.log(range[saturdayStart])
 
 // Generalize adjustDayLightSavings function to all years to 2038
-//see https://stackoverflow.com/questions/5741632/javascript-date-7-days 
-//and https://stackoverflow.com/questions/12783685/how-to-find-out-how-many-if-any-weekends-occur-in-a-given-period
-//to finish getWeekendRange function
