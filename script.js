@@ -48,11 +48,13 @@ let saturdayEnd = 	1686974400000
 
 function getWeekendsRange(startSaturday, endSaturday){
   //return an array of weekend unix timestamps within range
-  
+  let weekendDate = new Date(startSaturday)
+  weekendDate.setDate(weekendDate.getDate() + 7);
+  console.log(weekendDate)
   const weekendArr = []
 
 }
-
+getWeekendsRange(1678510800000, 1686974400000)
 console.log(range)
 console.log(range[saturdayStart])
 
