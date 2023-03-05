@@ -6,12 +6,13 @@ function generateDates(startDate, endDate){
   let unixEnd = endDate.getTime();
   for (let u = unixStart; u<=unixEnd; u +=86400000) {
     // create key:value pairs with dates being the key, set 0 for all values
-    dateRange[timeConverter(u)] = 0
+    dateRange[adjustDaylightSavings(u)] = 0
     
   }
   return dateRange
 }
 
+//for easy manual conversion of date -> unix
 function parseDate(dateToParse) {
   var parts = dateToParse.match(/(\d+)/g);
   // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
@@ -78,6 +79,7 @@ let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
 console.log(weekendsInInterval)
 console.log(range[saturdayStart])
 
+//Make weekend range output unix timestamps
 // Combine weekends range function with generate dates to remove weekends
 // remove days off and PED from date array
-//set up for loop to add 1-6 values to date objects in array to correspond to cycle days
+//set up for loop to add 1-6 values to date objects in array to correspond to cycle days 
