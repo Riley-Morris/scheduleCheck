@@ -3,12 +3,10 @@
 function generateDates(startDate, endDate){
   let dateRange = {}
   let unixStart = startDate.getTime();
-  console.log(unixStart + ' - unix start here')
-  console.log(timeConverter(unixStart) + ' readable format here for time start')
   let unixEnd = endDate.getTime();
   for (let u = unixStart; u<=unixEnd; u +=86400000) {
     // create key:value pairs with dates being the key, set 0 for all values
-    dateRange[u] = 0
+    dateRange[timeConverter(u)] = 0
     
   }
   return dateRange
@@ -29,14 +27,21 @@ function timeConverter(unixTimeStamp){
 }
 
 function adjustDaylightSavings(unixTimeStamp){
-  //configured for 2023 only
-  if (unixTimeStamp > 1678597200000 && unixTimeStamp < 1699156800000){
+  //configured for 2023/24 only
+  //btw mar 12 -= nov 5 2023
+  if (unixTimeStamp > 1678597200000 && unixTimeStamp < 1699156800000 
+    //btw mar 10-nov 3 2024
+    || unixTimeStamp > 17100468009000 && unixTimeStamp < 1730606400000
+    //btw mar 9-nov 2 2025
+    || unixTimeStamp > 1741496400000 && unixTimeStamp < 1762056000000){
+      //increment by 1 hour
     let newStamp = unixTimeStamp + 3600000
     return newStamp
   }else {
     return unixTimeStamp
   }
 }
+
 
 let start = parseDate('2023-03-06')
 let end = parseDate('2023-06-23')
@@ -73,4 +78,6 @@ let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
 console.log(weekendsInInterval)
 console.log(range[saturdayStart])
 
-// Generalize adjustDayLightSavings function to all years to 2038
+// Combine weekends range function with generate dates to remove weekends
+// remove days off and PED from date array
+//set up for loop to add 1-6 values to date objects in array to correspond to cycle days
