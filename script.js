@@ -1,12 +1,12 @@
 //Functions operate with milliseconds unix time stamp
 
 function generateDates(startDate, endDate){
-  let dateRange = {}
+  let dateRange = []
   let unixStart = startDate.getTime();
   let unixEnd = endDate.getTime();
   for (let u = unixStart; u<=unixEnd; u +=86400000) {
     // create key:value pairs with dates being the key, set 0 for all values
-    dateRange[adjustDaylightSavings(u)] = 0
+    dateRange.push(adjustDaylightSavings(u))
     
   }
   return dateRange
@@ -22,11 +22,6 @@ function parseDate(dateToParse) {
 let testDate = adjustDaylightSavings(parseDate('2023-03-13').getTime())
 
 
-function timeConverter(unixTimeStamp){
-  const a = new Date(unixTimeStamp)
-  return a
-}
-
 function adjustDaylightSavings(unixTimeStamp){
   //configured for 2023/24 only
   //btw mar 12 -= nov 5 2023
@@ -36,7 +31,7 @@ function adjustDaylightSavings(unixTimeStamp){
     //btw mar 9-nov 2 2025
     || unixTimeStamp > 1741496400000 && unixTimeStamp < 1762056000000){
       //increment by 1 hour
-    let newStamp = unixTimeStamp + 3600000
+    let newStamp = unixTimeStamp - 3600000
     return newStamp
   }else {
     return unixTimeStamp
@@ -77,11 +72,21 @@ function getWeekendsRange(startSaturday, endSaturday){
   }
   return weekendArr
 }
+//function to help testing by translating unix time into date/time strings
+
+function showFullTime(unixArray){
+  return unixArray.forEach(element => {
+    let dateTimeFull = new Date(element)
+    console.log(dateTimeFull)
+  });
+}
+
 let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
 console.log(weekendsInInterval)
-console.log(range[saturdayStart])
-
+console.log(range)
 
 // Combine weekends range function with generate dates to remove weekends
+let filteredRange = range.filter((timeStamp)=>!weekendsInInterval.includes(timeStamp))
+showFullTime(filteredRange)
 // remove days off and PED from date array
 //set up for loop to add 1-6 values to date objects in array to correspond to cycle days 
