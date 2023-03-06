@@ -75,10 +75,10 @@ function getWeekendsRange(startSaturday, endSaturday){
 //function to help testing by translating unix time into date/time strings
 
 function showFullTime(unixArray){
-  return unixArray.forEach(element => {
-    let dateTimeFull = new Date(element)
-    console.log(dateTimeFull)
-  });
+  for(let i = 0;i<unixArray.length;i++){
+    let dateTimeFull = new Date(unixArray[i])
+    console.log(i+ ': ' + dateTimeFull)
+  };
 }
 
 let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
@@ -87,6 +87,23 @@ console.log(range)
 
 // Combine weekends range function with generate dates to remove weekends
 let filteredRange = range.filter((timeStamp)=>!weekendsInInterval.includes(timeStamp))
+
+function deleteArrayItems(arrayToStart, ...indexesToDelete){
+  for (let i of indexesToDelete){
+    delete arrayToStart[i]
+  }
+}
+
+// filteredRange.splice(7, 1)
+// filteredRange.splice(16, 1)
+// filteredRange.splice(17, 1)
+// filteredRange.splice(26, 1)
+// filteredRange.splice(27, 1)
+// filteredRange.splice(42, 10)
+// filteredRange.splice(57, 1)
+// filteredRange.splice(82, 1)
+
+deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
+  48, 49, 50, 51, 57, 82)
 showFullTime(filteredRange)
-// remove days off and PED from date array
 //set up for loop to add 1-6 values to date objects in array to correspond to cycle days 
