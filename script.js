@@ -68,10 +68,12 @@ function getWeekendsRange(startSaturday, endSaturday){
   for (let i = 1; i <= numberOfSaturdays; i++){
     let satDate = new Date(startSaturday);
     satDate.setDate(satDate.getDate() + (i*7));
-    weekendArr.push(satDate)
+    const satUnixTimeStamp = Math.floor(satDate.getTime()/1000)
     let sunDate = new Date(startSunday);
     sunDate.setDate(sunDate.getDate() + (i*7));
-    weekendArr.push(sunDate)
+    const sunUnixTimeStamp = Math.floor(sunDate.getTime()/1000)
+    weekendArr.push(parseInt(satUnixTimeStamp + '000'))
+    weekendArr.push(parseInt(sunUnixTimeStamp + '000'))
   }
   return weekendArr
 }
@@ -79,7 +81,7 @@ let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
 console.log(weekendsInInterval)
 console.log(range[saturdayStart])
 
-//Make weekend range output unix timestamps
+
 // Combine weekends range function with generate dates to remove weekends
 // remove days off and PED from date array
 //set up for loop to add 1-6 values to date objects in array to correspond to cycle days 
