@@ -51,7 +51,6 @@ let saturdayEnd = 	1686974400000
 function getWeekendsRange(startSaturday, endSaturday){
   const weekendArr = []
   let startSunday = new Date(startSaturday)
-  let endSunday = new Date(endSaturday)
   startSunday.setDate(startSunday.getDate() + 1)
   //seven days of unix timestamp
   const sevenDays = 86400000 * 7;
@@ -90,11 +89,18 @@ let filteredRange = range.filter((timeStamp)=>!weekendsInInterval.includes(timeS
 
 function deleteArrayItems(arrayToStart, ...indexesToDelete){
   for (let i of indexesToDelete){
-    delete arrayToStart[i]
+    delete arrayToStart[i] 
   }
+    //remove undefined values within array
+  let arrayAtEnd = arrayToStart.filter(item=>item)
+  return arrayAtEnd
 }
 
-deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
+let secondFilter = deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
   48, 49, 50, 51, 57, 82)
-showFullTime(filteredRange)
-//set up for loop to add 1-6 values to date objects in array to correspond to cycle days 
+
+console.log(showFullTime(secondFilter))
+
+//TODO
+//set up for loop to create and add 1-6 values to date objects in array to correspond to cycle days 
+let actuallyFilteredRange = {}
