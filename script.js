@@ -94,15 +94,6 @@ function deleteArrayItems(arrayToStart, ...indexesToDelete){
   }
 }
 
-// filteredRange.splice(7, 1)
-// filteredRange.splice(16, 1)
-// filteredRange.splice(17, 1)
-// filteredRange.splice(26, 1)
-// filteredRange.splice(27, 1)
-// filteredRange.splice(42, 10)
-// filteredRange.splice(57, 1)
-// filteredRange.splice(82, 1)
-
 deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
   48, 49, 50, 51, 57, 82)
 showFullTime(filteredRange)
