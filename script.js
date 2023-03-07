@@ -1,3 +1,5 @@
+
+
 //Functions operate with milliseconds unix time stamp
 
 //generate an array of dates of the school year
@@ -78,7 +80,16 @@ function deleteArrayItems(arrayToStart, ...indexesToDelete){
   let arrayAtEnd = arrayToStart.filter(item=>item)
   return arrayAtEnd
 }
-
+//check current day and remove any that have passed
+function updateArrayDays(dateArray){
+  let now = new Date()
+  now.setHours(0, 0, 0, 0)
+  unixNow = Date.parse(now)
+  let currentDateIndex = dateArray.indexOf(unixNow)
+  if(currentDateIndex !== -1) {
+    return dateArray.splice(currentDateIndex, dateArray.length - 1);
+}return dateArray
+}
 //set up for loop to create and add 1-6 values to date objects in array to correspond to cycle days 
 //array must start on cycle day 1
 function createObjectAndValues(dateArray){
@@ -94,6 +105,7 @@ function createObjectAndValues(dateArray){
   return dateObject
 }
 
+
 let start = parseDate('2023-03-06')
 let end = parseDate('2023-06-23')
 let range = generateDates(start, end)
@@ -106,12 +118,15 @@ let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
 
 // Combine weekends range function with generate dates to remove weekends
 let filteredRange = range.filter((timeStamp)=>!weekendsInInterval.includes(timeStamp))
-//filter out PED and holidays
-let secondFilter = deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
-  48, 49, 50, 51, 57, 82)
+//filter out PED and holidays, then pass through function to remove old dates
+let secondFilter = updateArrayDays(deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
+  48, 49, 50, 51, 57, 82))
+
+
 //create date object with correct cycle days
 let cycleDaysObject = createObjectAndValues(secondFilter)
 console.log(cycleDaysObject)
+//get length of object
 let daysLeft = Object.keys(cycleDaysObject).length
 console.log(daysLeft)
 //TODO
@@ -119,3 +134,6 @@ console.log(daysLeft)
 //is greater than previous list items and remove list items and return length of array
 //combine js with css to highlight current cycle day
 // allow drop down selection for other days
+
+
+
