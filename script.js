@@ -100,6 +100,8 @@ let secondFilter = deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44
   48, 49, 50, 51, 57, 82)
 
 
+//set up for loop to create and add 1-6 values to date objects in array to correspond to cycle days 
+//array must start on cycle day 1
 function createObjectAndValues(dateArray){
   counter = 0
   dateObject = {}
@@ -114,8 +116,9 @@ function createObjectAndValues(dateArray){
 }
 let cycleDaysObject = createObjectAndValues(secondFilter)
 console.log(cycleDaysObject)
+
 //TODO
-//set up for loop to create and add 1-6 values to date objects in array to correspond to cycle days 
+
 //look at .reduce
 //combine js with css to highlight current cycle day
 // allow drop down selection for other days
