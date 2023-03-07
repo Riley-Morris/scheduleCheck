@@ -99,8 +99,21 @@ function deleteArrayItems(arrayToStart, ...indexesToDelete){
 let secondFilter = deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
   48, 49, 50, 51, 57, 82)
 
-console.log(showFullTime(secondFilter))
 
+function createObjectAndValues(dateArray){
+  counter = 0
+  dateObject = {}
+  for (const key of dateArray){
+    if (counter === 6){
+      counter = 1
+    }else {
+      counter++
+    }dateObject[key] = counter
+  }
+  return dateObject
+}
+let cycleDaysObject = createObjectAndValues(secondFilter)
+console.log(cycleDaysObject)
 //TODO
 //set up for loop to create and add 1-6 values to date objects in array to correspond to cycle days 
 //look at .reduce
