@@ -118,7 +118,7 @@ let cycleDaysObject = createObjectAndValues(secondFilter)
 console.log(cycleDaysObject)
 
 //TODO
-
-//look at .reduce
+//make a countdown function to end of year - run a function that checks if current day 
+//is greater than previous list items and remove list items and return length of array
 //combine js with css to highlight current cycle day
 // allow drop down selection for other days
