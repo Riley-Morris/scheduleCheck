@@ -71,7 +71,7 @@ function getWeekendsRange(startSaturday, endSaturday){
   }
   return weekendArr
 }
-//function to help testing by translating unix time into date/time strings
+//function to help testing by translating unix time into indexed date/time strings
 
 function showFullTime(unixArray){
   for(let i = 0;i<unixArray.length;i++){
@@ -103,6 +103,6 @@ console.log(showFullTime(secondFilter))
 
 //TODO
 //set up for loop to create and add 1-6 values to date objects in array to correspond to cycle days 
-let actuallyFilteredRange = {}
+//look at .reduce
 //combine js with css to highlight current cycle day
 // allow drop down selection for other days
