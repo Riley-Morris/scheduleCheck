@@ -1,5 +1,6 @@
 //Functions operate with milliseconds unix time stamp
 
+//generate an array of dates of the school year
 function generateDates(startDate, endDate){
   let dateRange = []
   let unixStart = startDate.getTime();
@@ -19,9 +20,6 @@ function parseDate(dateToParse) {
   return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
 }
 
-let testDate = adjustDaylightSavings(parseDate('2023-03-13').getTime())
-
-
 function adjustDaylightSavings(unixTimeStamp){
   //configured for 2023/24 only
   //btw mar 12 -= nov 5 2023
@@ -37,15 +35,6 @@ function adjustDaylightSavings(unixTimeStamp){
     return unixTimeStamp
   }
 }
-
-
-let start = parseDate('2023-03-06')
-let end = parseDate('2023-06-23')
-let range = generateDates(start, end)
-
-//first saturday in above period
-let saturdayStart = 1678078800000
-let saturdayEnd = 	1686974400000
 
   //return an array of weekend unix timestamps within range
 function getWeekendsRange(startSaturday, endSaturday){
@@ -80,13 +69,7 @@ function showFullTime(unixArray){
   };
 }
 
-let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
-console.log(weekendsInInterval)
-console.log(range)
-
-// Combine weekends range function with generate dates to remove weekends
-let filteredRange = range.filter((timeStamp)=>!weekendsInInterval.includes(timeStamp))
-
+//remove PED and holidays from array
 function deleteArrayItems(arrayToStart, ...indexesToDelete){
   for (let i of indexesToDelete){
     delete arrayToStart[i] 
@@ -95,10 +78,6 @@ function deleteArrayItems(arrayToStart, ...indexesToDelete){
   let arrayAtEnd = arrayToStart.filter(item=>item)
   return arrayAtEnd
 }
-
-let secondFilter = deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
-  48, 49, 50, 51, 57, 82)
-
 
 //set up for loop to create and add 1-6 values to date objects in array to correspond to cycle days 
 //array must start on cycle day 1
@@ -114,9 +93,27 @@ function createObjectAndValues(dateArray){
   }
   return dateObject
 }
+
+let start = parseDate('2023-03-06')
+let end = parseDate('2023-06-23')
+let range = generateDates(start, end)
+
+//first saturday in above period
+let saturdayStart = 1678078800000
+let saturdayEnd = 	1686974400000
+
+let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
+
+// Combine weekends range function with generate dates to remove weekends
+let filteredRange = range.filter((timeStamp)=>!weekendsInInterval.includes(timeStamp))
+//filter out PED and holidays
+let secondFilter = deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
+  48, 49, 50, 51, 57, 82)
+//create date object with correct cycle days
 let cycleDaysObject = createObjectAndValues(secondFilter)
 console.log(cycleDaysObject)
-
+let daysLeft = Object.keys(cycleDaysObject).length
+console.log(daysLeft)
 //TODO
 //make a countdown function to end of year - run a function that checks if current day 
 //is greater than previous list items and remove list items and return length of array
