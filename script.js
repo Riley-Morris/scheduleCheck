@@ -104,7 +104,13 @@ function createObjectAndValues(dateArray){
   }
   return dateObject
 }
-
+//Add borders to current cycle day
+function addCycleBorders(cycleDayClass){
+  const cycleElements = document.querySelectorAll('.' + cycleDayClass)
+  for (const element of cycleElements){
+    element.style.border = "thick solid #0000FF"
+  } 
+}
 
 let start = parseDate('2023-03-06')
 let end = parseDate('2023-06-23')
@@ -127,22 +133,19 @@ let secondFilter = updateArrayDays(deleteArrayItems(filteredRange, 7, 16, 17, 26
 let cycleDaysObject = createObjectAndValues(secondFilter)
 console.log(cycleDaysObject)
 //get length of object
-let daysLeft = Object.keys(cycleDaysObject).length
+const daysLeft = Object.keys(cycleDaysObject).length
 console.log(daysLeft)
 
+const currentDay = secondFilter[0]
+const currentCycleDay = cycleDaysObject[currentDay]
 
-//THIS DOESNT WORK, node list returns 0
-function addCycleBorders(cycleDayClass){
-  const cycleElements = document.querySelectorAll('.' + cycleDayClass)
-  console.log(cycleElements.length)
-  for (const element of cycleElements){
-    element.style.border = "thick solid #0000FF"
-  } 
-}
+console.log(secondFilter)
+console.log(currentCycleDay)
 
-addCycleBorders('day3')
+addCycleBorders(`day${currentCycleDay}`)
 
 
+//There is a bug because the cycle days are regenerated every day from 1 at beginning of list - Fix this
 //TODO
 //make a countdown function to end of year - run a function that checks if current day 
 //is greater than previous list items and remove list items and return length of array
