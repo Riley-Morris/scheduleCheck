@@ -129,6 +129,20 @@ console.log(cycleDaysObject)
 //get length of object
 let daysLeft = Object.keys(cycleDaysObject).length
 console.log(daysLeft)
+
+
+//THIS DOESNT WORK, node list returns 0
+function addCycleBorders(cycleDayClass){
+  const cycleElements = document.querySelectorAll('.' + cycleDayClass)
+  console.log(cycleElements.length)
+  for (const element of cycleElements){
+    element.style.border = "thick solid #0000FF"
+  } 
+}
+
+addCycleBorders('day3')
+
+
 //TODO
 //make a countdown function to end of year - run a function that checks if current day 
 //is greater than previous list items and remove list items and return length of array
