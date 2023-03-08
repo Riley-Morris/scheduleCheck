@@ -49,7 +49,6 @@ function getWeekendsRange(startSaturday, endSaturday){
   const timeInterval = endSaturday - startSaturday
   //amount of saturdays in time interval
   const numberOfSaturdays = timeInterval/sevenDays
-  console.log(Math.round(numberOfSaturdays))
   for (let i = 1; i <= numberOfSaturdays; i++){
     let satDate = new Date(startSaturday);
     satDate.setDate(satDate.getDate() + (i*7));
@@ -80,16 +79,14 @@ function deleteArrayItems(arrayToStart, ...indexesToDelete){
   let arrayAtEnd = arrayToStart.filter(item=>item)
   return arrayAtEnd
 }
-//check current day and remove any that have passed
-function updateArrayDays(dateArray){
+
+function getCurrentDay(){
   let now = new Date()
   now.setHours(0, 0, 0, 0)
   unixNow = Date.parse(now)
-  let currentDateIndex = dateArray.indexOf(unixNow)
-  if(currentDateIndex !== -1) {
-    return dateArray.splice(currentDateIndex, dateArray.length - 1);
-}return dateArray
+  return unixNow
 }
+
 //set up for loop to create and add 1-6 values to date objects in array to correspond to cycle days 
 //array must start on cycle day 1
 function createObjectAndValues(dateArray){
@@ -112,6 +109,15 @@ function addCycleBorders(cycleDayClass){
   } 
 }
 
+// check current day and remove any that have passed
+function updateArrayDays(dateArray){
+  let Unixnow = getCurrentDay()
+  let currentDateIndex = dateArray.indexOf(unixNow)
+  if(currentDateIndex !== -1) {
+    return dateArray.splice(currentDateIndex, dateArray.length - 1);
+}return dateArray
+}
+
 let start = parseDate('2023-03-06')
 let end = parseDate('2023-06-23')
 let range = generateDates(start, end)
@@ -125,25 +131,20 @@ let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
 // Combine weekends range function with generate dates to remove weekends
 let filteredRange = range.filter((timeStamp)=>!weekendsInInterval.includes(timeStamp))
 //filter out PED and holidays, then pass through function to remove old dates
-let secondFilter = updateArrayDays(deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
+let secondFilter = (deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
   48, 49, 50, 51, 57, 82))
 
 
 //create date object with correct cycle days
 let cycleDaysObject = createObjectAndValues(secondFilter)
-console.log(cycleDaysObject)
-//get length of object
-const daysLeft = Object.keys(cycleDaysObject).length
-console.log(daysLeft)
 
-const currentDay = secondFilter[0]
+const currentDay = getCurrentDay()
 const currentCycleDay = cycleDaysObject[currentDay]
-
-console.log(secondFilter)
-console.log(currentCycleDay)
-
+//add borders to current day column on html
 addCycleBorders(`day${currentCycleDay}`)
-
+//create array of only current day + what is left
+const dayLeft = updateArrayDays(secondFilter)
+console.log(dayLeft.length)
 
 //There is a bug because the cycle days are regenerated every day from 1 at beginning of list - Fix this
 //TODO
