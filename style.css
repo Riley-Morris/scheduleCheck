@@ -1,14 +1,32 @@
 html {
     font-family: sans-serif;
+    height: 100%;
   }
  body{
   font-size: 14px;
+
+  height: 100%;
  } 
+ .bg{
+  background-image: url('background.jpg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ }
+ .containerBox{
+  display: flex;
+
+ }
   table {
     border-collapse: collapse;
     border: 2px solid rgb(200,200,200);
     letter-spacing: 1px;
     font-size: 0.8rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+   
   }
   
   td, th {
@@ -37,16 +55,30 @@ html {
   }
   .className{
     padding: 1%;
+    font-size: 2rem;
+    color: aliceblue;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5%;
   }
 
     
   .textDisplayBox{
     font-size: 1.8rem;
-
+    color: #C5C5C7;
+    padding-bottom: 1%;
+    padding-top: 4px;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
   }
   .textDisplayNeighbor{
     display: inline;
     }
   .dynamicDisplay{
     text-decoration: underline;
+  }
+  #firstTextBox{
+    margin-top: 2%;
   }
