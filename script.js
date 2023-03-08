@@ -1,6 +1,6 @@
-
-
 //Functions operate with milliseconds unix time stamp
+//When updating for new year, will need to change start, end, saturday start + end, and items to delete within range
+//ie PED and holidays
 
 //generate an array of dates of the school year
 function generateDates(startDate, endDate){
@@ -117,6 +117,20 @@ function updateArrayDays(dateArray){
     return dateArray.splice(currentDateIndex, dateArray.length - 1);
 }return dateArray
 }
+//create array of only current day + what is left and display that information on html
+function pushCurrentDay(dateArray){
+  const today = cycleDaysObject[getCurrentDay()]
+  const cycleDayElement = document.querySelector('#cycleDay')
+  cycleDayElement.innerHTML = today
+}
+
+//get days left and push to html
+function pushDaysLeft(dateArray){
+  const dayLeft = updateArrayDays(dateArray).length
+  const daysLeftElement = document.querySelector('#daysLeft')
+  daysLeftElement.innerHTML = dayLeft
+}
+
 
 let start = parseDate('2023-03-06')
 let end = parseDate('2023-06-23')
@@ -125,7 +139,6 @@ let range = generateDates(start, end)
 //first saturday in above period
 let saturdayStart = 1678078800000
 let saturdayEnd = 	1686974400000
-
 let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
 
 // Combine weekends range function with generate dates to remove weekends
@@ -134,7 +147,6 @@ let filteredRange = range.filter((timeStamp)=>!weekendsInInterval.includes(timeS
 let secondFilter = (deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
   48, 49, 50, 51, 57, 82))
 
-
 //create date object with correct cycle days
 let cycleDaysObject = createObjectAndValues(secondFilter)
 
@@ -142,16 +154,11 @@ const currentDay = getCurrentDay()
 const currentCycleDay = cycleDaysObject[currentDay]
 //add borders to current day column on html
 addCycleBorders(`day${currentCycleDay}`)
-//create array of only current day + what is left
-const dayLeft = updateArrayDays(secondFilter)
-console.log(dayLeft.length)
-
-//There is a bug because the cycle days are regenerated every day from 1 at beginning of list - Fix this
+//get days left displayed to html
+pushCurrentDay(secondFilter)
+pushDaysLeft(secondFilter)
 //TODO
 //make a countdown function to end of year - run a function that checks if current day 
 //is greater than previous list items and remove list items and return length of array
 //combine js with css to highlight current cycle day
 // allow drop down selection for other days
-
-
-
