@@ -105,7 +105,7 @@ function createObjectAndValues(dateArray){
 function addCycleBorders(cycleDayClass){
   const cycleElements = document.querySelectorAll('.' + cycleDayClass)
   for (const element of cycleElements){
-    element.style.border = "thick solid #000000"
+    element.style.border = "thick solid #FEB729"
   } 
 }
 
