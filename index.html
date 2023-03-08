@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Badabin Schedule</title>
     <link rel="stylesheet" href="style.css">
     
 </head>
 <body>
-    <div class="bg">
-        <header class = 'className'>Class: <strong>Work Oriented Training Path (Badabin Eeyou)</strong></header>
-      
+    <header class = 'className'>Class: <strong>Work Oriented Training Path (Badabin Eeyou)</strong></header>
+    <div class="tableWrapper">
         <table id="scheduleTable">
             <tr>
                 <th>Time</th>
@@ -82,14 +81,15 @@
                     <td class = 'day6'>Introduction to the Work World (Placement)</td>
                 </th>
             </tr>
-        </table> 
+        </table>
+    </div> 
         <div id = 'firstTextBox' class = 'textDisplayBox'>
             <span class = 'textDisplayNeighbor'>Today is day: <span class = 'dynamicDisplay' id = 'cycleDay'></span></span>
         </div> 
         <div class = 'textDisplayBox'>
             <span class = 'textDisplayNeighbor'>There are: <span class = 'dynamicDisplay' id = 'daysLeft'></span> school days left in the year</span>
         </div> 
-    </div>  
+     
 </body>
     <script src = 'script.js'></script>
 </html>

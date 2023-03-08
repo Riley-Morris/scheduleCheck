@@ -2,73 +2,94 @@ html {
     font-family: sans-serif;
     height: 100%;
   }
- body{
-  font-size: 14px;
+body{
+height: 100%;
+background-image: url('background.jpg');
+height: 100%;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+} 
 
-  height: 100%;
- } 
- .bg{
-  background-image: url('background.jpg');
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
- }
- .containerBox{
-  display: flex;
 
- }
+.containerBox{
+display: flex;
+
+}
+.tableWrapper{
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200,200,200);
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #C5C5C7;
+}
+td, th {
+  border: 1px solid rgb(190,190,190);
+  padding: 10px 20px;
+}
+
+td {
+  text-align: center;
+}
+
+caption {
+  padding: 10px;
+}
+.className{
+  padding: 1%;
+  font-size: 2rem;
+  color: aliceblue;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+}
+
+  
+.textDisplayBox{
+  font-size: 1.8rem;
+  color: #C5C5C7;
+  padding-bottom: 1%;
+  padding-top: 4px;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.textDisplayNeighbor{
+  display: inline;
+  }
+.dynamicDisplay{
+  text-decoration: underline;
+}
+#firstTextBox{
+  margin-top: 2%;
+}
+@media screen and (max-width: 480px) {
+  body {
+  background-attachment:fixed;
+  }
+  }
+@media screen and (max-width: 480px) {
   table {
-    border-collapse: collapse;
-    border: 2px solid rgb(200,200,200);
-    letter-spacing: 1px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    color: #C5C5C7;
-   
+  width: 50vw;
+  height: 50vh;
   }
-  
-  td, th {
-    border: 1px solid rgb(190,190,190);
-    padding: 10px 20px;
+  }  
+@media screen and (max-width: 480px) {
+  .textDisplayBox {
+  max-width: 90vw;
+  font-size: 1.2rem;
   }
-  
-  td {
-    text-align: center;
+  }   
+@media screen and (max-width: 480px) {
+  header {
+  max-width: 90vw;
+  font-size: 80%;
   }
-
-  caption {
-    padding: 10px;
-  }
-  .className{
-    padding: 1%;
-    font-size: 2rem;
-    color: aliceblue;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 5%;
-  }
-
-    
-  .textDisplayBox{
-    font-size: 1.8rem;
-    color: #C5C5C7;
-    padding-bottom: 1%;
-    padding-top: 4px;
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  .textDisplayNeighbor{
-    display: inline;
-    }
-  .dynamicDisplay{
-    text-decoration: underline;
-  }
-  #firstTextBox{
-    margin-top: 2%;
-  }
+  }   
