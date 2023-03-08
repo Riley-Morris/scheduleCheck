@@ -1,7 +1,9 @@
 html {
     font-family: sans-serif;
   }
-  
+ body{
+  font-size: 14px;
+ } 
   table {
     border-collapse: collapse;
     border: 2px solid rgb(200,200,200);
@@ -36,14 +38,15 @@ html {
   .className{
     padding: 1%;
   }
-  select{
-    font-size: 90%;
-  }
+
     
-  
-  .cycleDayBox{
-    padding: 1%;
-    margin-top: 1%;
-    font-size: 150%;
-    width: fit-content;
+  .textDisplayBox{
+    font-size: 1.8rem;
+
+  }
+  .textDisplayNeighbor{
+    display: inline;
+    }
+  .dynamicDisplay{
+    text-decoration: underline;
   }
