@@ -49,7 +49,7 @@ function getWeekendsRange(startSaturday, endSaturday){
   const timeInterval = endSaturday - startSaturday
   //amount of saturdays in time interval
   const numberOfSaturdays = timeInterval/sevenDays
-  for (let i = 1; i <= numberOfSaturdays; i++){
+  for (let i = 0; i <= numberOfSaturdays + 1; i++){
     let satDate = new Date(startSaturday);
     satDate.setDate(satDate.getDate() + (i*7));
     const satUnixTimeStamp = Math.floor(satDate.getTime()/1000)
@@ -118,10 +118,14 @@ function updateArrayDays(dateArray){
 }return dateArray
 }
 //create array of only current day + what is left and display that information on html
-function pushCurrentDay(dateArray){
-  const today = cycleDaysObject[getCurrentDay()]
+function pushCurrentDay(obj){
+  const today = obj[getCurrentDay()]
   const cycleDayElement = document.querySelector('#cycleDay')
+  if (typeof today === 'undefined'){
+    cycleDayElement.innerHTML = 'Not a school day, why are you checking this?'
+  }else{
   cycleDayElement.innerHTML = today
+  }
 }
 
 //get days left and push to html
@@ -155,7 +159,7 @@ const currentCycleDay = cycleDaysObject[currentDay]
 //add borders to current day column on html
 addCycleBorders(`day${currentCycleDay}`)
 //get days left displayed to html
-pushCurrentDay(secondFilter)
+pushCurrentDay(cycleDaysObject)
 pushDaysLeft(secondFilter)
 //TODO
 //make a countdown function to end of year - run a function that checks if current day 
