@@ -61,8 +61,8 @@ function getWeekendsRange(startSaturday, endSaturday){
   }
   return weekendArr
 }
-//function to help testing by translating unix time into indexed date/time strings
 
+//function to help testing by translating unix time into indexed date/time strings
 function showFullTime(unixArray){
   for(let i = 0;i<unixArray.length;i++){
     let dateTimeFull = new Date(unixArray[i])
@@ -110,9 +110,9 @@ function addCycleBorders(cycleDayClass){
 }
 
 // check current day and remove any that have passed
-function updateArrayDays(dateArray){
-  let Unixnow = getCurrentDay()
-  let currentDateIndex = dateArray.indexOf(unixNow)
+function updateArrayDays(dateArray, today){
+  let unixNow = today;
+  let currentDateIndex = dateArray.indexOf(unixNow);
   if(currentDateIndex !== -1) {
     return dateArray.splice(currentDateIndex, dateArray.length - 1);
 }return dateArray
@@ -121,8 +121,8 @@ function updateArrayDays(dateArray){
 function pushCurrentDay(obj){
   const today = obj[getCurrentDay()]
   const cycleDayElement = document.querySelector('#cycleDay')
-  if (typeof today === 'undefined'){
-    cycleDayElement.innerHTML = 'Not a school day, why are you checking this?'
+  if (today === undefined || today === false){
+    cycleDayElement.innerHTML = 'Not a school day, why are you checking this?, the last cycle day was ' + obj[getLastSchoolDay(getCurrentDay(), cycleDaysObject)] 
   }else{
   cycleDayElement.innerHTML = today
   }
@@ -130,11 +130,31 @@ function pushCurrentDay(obj){
 
 //get days left and push to html
 function pushDaysLeft(dateArray){
-  const dayLeft = updateArrayDays(dateArray).length
-  const daysLeftElement = document.querySelector('#daysLeft')
-  daysLeftElement.innerHTML = dayLeft
-}
+  if (cycleDaysObject[currentDay] !== undefined && cycleDaysObject[currentDay] !== false){
+    const dayLeft = updateArrayDays(dateArray, getCurrentDay()).length
+    const daysLeftElement = document.querySelector('#daysLeft')
+    daysLeftElement.innerHTML = dayLeft
+    } else {
+      console.log('triggerd')
+      console.log('last day was ' + getLastSchoolDay(getCurrentDay(), cycleDaysObject))
+      const dayLeft = updateArrayDays(dateArray, getLastSchoolDay(getCurrentDay(), cycleDaysObject)).length
+      const daysLeftElement = document.querySelector('#daysLeft')
+      daysLeftElement.innerHTML = dayLeft
+    }
+  }
 
+//loop through object to find the last day that exists and return its value (cycle day)
+function getLastSchoolDay(today, obj){
+  // today = (adjustDaylightSavings(today))
+  for (let u = today; u>=(parseInt(Object.keys(obj)[0])); u -=86400000){
+    if (u ===1678593600000){
+      u += 3600000
+    }
+    if (obj[u] !== false && obj[u] !== undefined){
+      return (u)
+    } 
+  }
+} 
 
 let start = parseDate('2023-03-06')
 let end = parseDate('2023-06-23')
@@ -148,7 +168,7 @@ let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
 // Combine weekends range function with generate dates to remove weekends
 let filteredRange = range.filter((timeStamp)=>!weekendsInInterval.includes(timeStamp))
 //filter out PED and holidays, then pass through function to remove old dates
-let secondFilter = (deleteArrayItems(filteredRange, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
+let secondFilter = (deleteArrayItems(filteredRange, 5, 7, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
   48, 49, 50, 51, 57, 82))
 
 //create date object with correct cycle days
@@ -161,8 +181,5 @@ addCycleBorders(`day${currentCycleDay}`)
 //get days left displayed to html
 pushCurrentDay(cycleDaysObject)
 pushDaysLeft(secondFilter)
-//TODO
-//make a countdown function to end of year - run a function that checks if current day 
-//is greater than previous list items and remove list items and return length of array
-//combine js with css to highlight current cycle day
-// allow drop down selection for other days
+
+console.log(cycleDaysObject[getCurrentDay()])
