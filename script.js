@@ -122,7 +122,7 @@ function pushCurrentDay(obj){
   const today = obj[getCurrentDay()]
   const cycleDayElement = document.querySelector('#cycleDay')
   if (today === undefined || today === false){
-    cycleDayElement.innerHTML = 'Not a school day, why are you checking this?, the last cycle day was ' + obj[getLastSchoolDay(getCurrentDay(), cycleDaysObject)] 
+    cycleDayElement.innerHTML = 'Not a school day, the last cycle day was ' + obj[getLastSchoolDay(getCurrentDay(), cycleDaysObject)] 
   }else{
   cycleDayElement.innerHTML = today
   }
