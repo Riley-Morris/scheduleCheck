@@ -168,7 +168,7 @@ let weekendsInInterval = getWeekendsRange(1678510800000, 1686974400000)
 // Combine weekends range function with generate dates to remove weekends
 let filteredRange = range.filter((timeStamp)=>!weekendsInInterval.includes(timeStamp))
 //filter out PED and holidays, then pass through function to remove old dates
-let secondFilter = (deleteArrayItems(filteredRange, 5, 16, 17, 26, 27, 42, 43, 44, 45, 46, 47,
+let secondFilter = (deleteArrayItems(filteredRange, 5, 14,15, 26, 27, 42, 43, 44, 45, 46, 47,
   48, 49, 50, 51, 57, 78, 82))
 //create date object with correct cycle days
 let cycleDaysObject = createObjectAndValues(secondFilter)
